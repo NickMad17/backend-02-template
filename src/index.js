@@ -24,7 +24,7 @@ const server = http.createServer((request, response) => {
         response.write(`Hello, ${userName}`);
         response.end();
         return;
-    } else if (request.url === '/?hello') {
+    } else if (request.url === '/?hello=') {
         response.statusCode = 400;
         response.statusMessage = "Bad Request";
         response.setHeader("Content-Type", "text/plain");
@@ -39,20 +39,11 @@ const server = http.createServer((request, response) => {
         response.end()
 
         return;
-    } else if (request.url === ':hello') {
-        response.status = 200
-        response.statusMessage = 'OK'
-        response.header = 'Content-Type: text/plain'
-        response.write()
-        response.end()
-
-        return;
-    } else {
-        response.status = 500
-        response.end()
-        return;
     }
 
+    response.status = 500
+    response.end()
+    return;
 
     // Написать обработчик запроса:
     // - Ответом на запрос `?hello=<name>` должна быть **строка** "Hello, <name>.", код ответа 200
